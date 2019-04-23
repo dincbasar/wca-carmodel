@@ -15,9 +15,11 @@ Designed to go from basic to more complex, skip parts as needed.
 * __Cloud Computing__: Your computer asking some other computer (usually rented, examples: Amazon AWS, Microsoft Azure) to run a program over the internet, and receiving the output. High network latency, but more powerful / purpose-specific computers possible. 
 * __Cloudlet__: A computer that sits right inbetween your local machine and the cloud machines, to help with the network latency in operations that can be computed without the cloud machines. Example: Amazon Alexa, Google Home. 
 * __Edge computing__: Using intermediaries (like cloudlets) in the distributed system. Can help by caching data, performing basic operations. For instance, Google Home device can listen to and analyze speech to detect "Hello Google" wake-up command. Sending 24h non-stop speech data to Google Servers would be very inefficient and use significant data. 
+* __Container__: A bounded virtual environment for an application to run in. They allow you to quickly export all the required dependencies of an application from a machine to another, along with other benefits. 
+* __Docker__: A container service that will likely be used by you soon -- in the form "nvidia-docker". 
 * __X-as-a-service__: Defines what is being given to the customer by the provider. X can be software, platform, infrastructure.
 
-![alt-text](https://github.com/dincbasar/wca-carmodel/blob/master/Screen%20Shot%202019-04-22%20at%208.40.50%20PM.png)
+<img src="https://github.com/dincbasar/wca-carmodel/blob/master/Screen%20Shot%202019-04-22%20at%208.40.50%20PM.png" width="700">
 
 _Taken from Microsoft Azure documentation._
 
@@ -37,18 +39,53 @@ ___
 
 ## Expected Timeline
 
+### Training
+
 1) Figure out a useful process to develop a WCA in. Some questions to consider:
   * Will people actually use it in the future? Does it serve as an example of what Gabriel can achieve?
   * How easy will it be to repeat the process in a lab environment? 
   * How much time do you have to build the application? If you only have weeks, go as basic as possible. 
   * Is the application possible using a smart glass with input and output capabilities on sound & video? A process where guidance can be distracting (like driving a car) might not be a good application.  
-  * 
+  
 2) If you are able to use TPOD for your application (ask your supervisor about this): get started with taking training videos. Start basic with the number of distinct object classes you are trying to detect, then add more as you build experience. Always keep your use environment (where/how/when will the glass wearer use this application) in mind in this step to take the most applicable videos possible. Some features of useful videos:
+  * Landscape (horizontal) videos only. Do not take vertical ones, as TPOD will not be happy with that.
   * Consider the lighting conditions of the use environment. If you are building for the outdoors, do not take your videos inside. If you are building for indoors, make sure to use multiple levels and types of lighting, as these can significantly change the accuracy of the RCNN. 
   * Use false positives ( objects that are similar to the one you are trying to detect, but definitely not what the exact object) in the background, especially items that can be found in your use environment. These will help the RCNN not make mistakes.
-  * Length is variable, but 8-10 seconds is usually enough to get enough frames for a certain environment. 
-  * Keep movement low (if this is not against your application), but do not completely eliminate it. Some movement will result slightly-out-of-focus frames that are harder but probably useful to detect. In the end, there will be significant head movement with the glass, so losing track with low motion is probably not a good feature. If the training video includes quick movement, the basic tracker on TPOD will not be able to follow the frames. This will cause you to manually label many more frames than what is ideal.
-  * Think of your use environment to determine what object view characteristics you want. Would you like to be able to detect objects that are partially obstructed? Partially out of frame? 
+  * Video length is variable, but 8-10 seconds is usually enough to get enough frames (around 400-600) for a certain environment. 
+  * Keep movement low (if this is not against your application), but do not completely eliminate it. Some movement will result slightly-out-of-focus frames that are harder but probably useful to detect. In the end, there will be significant head movement with the glass, so losing track with low motion is probably not a good feature for your application. If the training video includes quick movement, the basic tracker on TPOD will not be able to follow the frames. This will cause you to manually label many more frames than what is ideal.
+  * Think of your use environment to determine what object view characteristics you want. Would you like to be able to detect objects that are partially obstructed? Partially out of frame? Held in hand? Merged with another object?
+  * Any background restrictions you might use is a critical choice in design. Discuss this with your supervisor early, according to the needs of your application.
+  * Take many videos, at least 10. There is a limit on how many frames should be used for each object, but that is presumably far away from what you can reach. 
+
+3) Create the required labels for the distinct objects you want to detect, and start labeling the frames.
+  * The server might crash at unexpected points. Save your work frequently (there is no auto-save), otherwise your work since the last save will be entirely discared. 
+  * If there are no labeled frames, TPOD discards entire frame.
+  * If a visible instance of the object is not labeled in a frame that has other labels, your accuracy will drop. In other words, if you are labeling a frame, either label it completely or include no labels at all. 
+  * Use the tracker to your advantage: after labeling an object, wait for a second or two, then observe next frames as long as the labels are not accurate.
+  * Label the entire object in frames. With motion, the tracker might switch to including only parts of the object. Correct these, and wait for the tracker again. 
+  * It is fine to have label bounds overlap, since TPOD only does upright rectangles. For instance, the following is perfectly OK: 
+<img src="https://github.com/dincbasar/wca-carmodel/blob/master/Screen%20Shot%202019-04-22%20at%209.55.39%20PM.png" width="250">
+  
+  * __Tochange__: What does the obstructed option do? Include information regarding that here
+  
+4) Submit the labeled videos for training. You are given the option to pick the videos and labels (distinct objects) that you would like to train your model on. Epoch = 10K or 20K is a good choice, and pick the faster-RCNN model for training. This process will take approximately an hour.
+
+5) From here onwards, you will need access to a GPU machine. Talk to your supervisor to obtain access. As of April 2019, one is available on cloudlet012.elijah.cs.cmu.edu. You can contact [Tom Eiszler](mailto:teiszler@cs.cmu.edu) to create an account.
+
+### Testing
+
+Now that you have a trained RCNN model, it is a good idea to test it and find all of its inaccuracies and mistakes. These will help you figure out how you can improve your training videos. 
+
+1) SSH into your GPU machine. 
+* If you are not on the CMU campus network, you will need to use [VPN](https://www.cmu.edu/computing/services/endpoint/network-access/vpn/how-to/index.html). Pick the Library Resources VPN from the drop-down menu when you get to the login option. 
+* You will need sudo access (most likely) to install packages, so make sure you have it. 
+
+2) Your machine might not have the necessary packages to run the RCNN clasifier. Here is a general overview of what you might need to install:
+* Python3: 
+* Nvidia-docker2: you can use 
+""" sudo apt-get install nvidia-docker2 """ 
+
+### Deployment
 
 What things you need to install the software and how to install them
 
