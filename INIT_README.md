@@ -1,6 +1,6 @@
 # Undergraduate Researcher Guide
 
-Welcome to Satyalab. This document is designed to facilitate your process of adapting and start working on the important stuff as quickly as possible. We will first give quick definitions to describe the environment, then give the helpful bits. 
+Welcome to Satyalab. This document is designed to facilitate your process of adapting to the environment, so you can start working on the important stuff as quickly as possible. We will first give quick definitions that are useful to know, then give the helpful bits about the timeline. 
 
 ## Definitions
 
