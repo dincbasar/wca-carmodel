@@ -33,6 +33,9 @@ _Taken from Microsoft Azure documentation._
 * __WCA__: Stands for Wearable Cognitive Assistant, applications that run on wearable computers (smart glass, watch, ...).
 * __Elijah__: Cloudlet based edge-computing, pushing the boundaries of both local resources and research at Satyalab :)
 * __Gabriel__: Wearable Cognitive Assistant platform being built by the lab. It is designed to enable the development of cognitive assistant applications primarily for smart glasses. As of April 2019, it is designed to run on Android devices only.
+
+![alt-text](https://github.com/dincbasar/wca-carmodel/blob/master/Screen%20Shot%202019-04-22%20at%2011.18.23%20PM.png)
+
 * __TPOD__: Stands for A Tool For Painless Object Detection. It is used to train a [faster-RCNN](https://arxiv.org/pdf/1506.01497.pdf) instance to help with object detection in cognitive assistants. It features a basic tracking model to help with labeling frames. Further details [here](Link Part Here).
 
 ___ 
