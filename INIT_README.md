@@ -91,7 +91,7 @@ sudo apt-get update
 # uwf, a simple firewall program
 sudo apt-get install uwf
 
-# add the CMU ip addresses, or your own if needed (google "ip address" to get yours, make sure VPN or campus network)
+# add the CMU ip addresses, or your own if needed (google "ip address" to get yours)
 sudo uwf allow from 128.237.0.0/16 # [or replace IP address as required]
 sudo ufw allow from 128.2.0.0/16  # [or replace IP address as required]
 
