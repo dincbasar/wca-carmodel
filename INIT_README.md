@@ -80,10 +80,47 @@ Now that you have a trained RCNN model, it is a good idea to test it and find al
 * If you are not on the CMU campus network, you will need to use [VPN](https://www.cmu.edu/computing/services/endpoint/network-access/vpn/how-to/index.html). Pick the Library Resources VPN from the drop-down menu when you get to the login option. 
 * You will need sudo access (most likely) to install packages, so make sure you have it. 
 
-2) Your machine might not have the necessary packages to run the RCNN clasifier. Here is a general overview of what you might need to install:
-* Python3: 
-* Nvidia-docker2: you can use 
-""" sudo apt-get install nvidia-docker2 """ 
+2) If you are the first to set up the machine, you will need to set up a firewall. The easiest way is to use `uwf`
+```
+# Update apt, package manager for linux: 
+sudo apt-get update 
+
+# uwf, a simple firewall program
+sudo apt-get install uwf
+
+# add the CMU ip addresses, or your own if needed (google "ip address" to get yours, make sure VPN or campus network)
+sudo uwf allow from 128.237.0.0/16 # [or replace IP address as required]
+sudo ufw allow from 128.2.0.0/16  # [or replace IP address as required]
+
+# deny all incoming and allow all outgoing by default
+sudo uwf default deny incoming
+sudo uwf default allow outgoing
+
+# start the firewall, no other user will be able to access after this line runs
+sudo ufw enable
+```
+
+3) Your machine might not have the necessary packages to run the RCNN clasifier. Apt is a useful package manager to do all of these quickly. Here is a general overview of what you might need to install:
+```
+# (Skip this line if you did step 2) Update apt, package manager for linux: 
+sudo apt-get update 
+
+# Install python3
+sudo apt-get install python3 
+
+# pip3, package manager for python3
+curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py 
+python3 get-pip.py
+
+# nvidia drivers, required by nvidia-docker2
+sudo apt-get install nvidia-container-runtime
+
+# nvidia-docker2, container service for TPOD
+sudo apt-get install nvidia-docker2 
+
+# restart docker if you had already started it before
+restart docker
+```
 
 ### Deployment
 
