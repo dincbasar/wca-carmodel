@@ -115,10 +115,10 @@ python3 get-pip.py
 # docker, the container service, not mandatory but still useful
 sudo apt-get install docker
 
-# nvidia drivers, required by nvidia-docker2
+# nvidia drivers, required by nvidia-docker
 sudo apt-get install nvidia-container-runtime
 
-# nvidia-docker2, container service for TPOD
+# nvidia-docker, container service for TPOD
 sudo apt-get install nvidia-docker2 
 
 # restart docker if you had already started it before
@@ -129,7 +129,7 @@ restart docker
 
 5) Run the docker container 
 
-``` docker pull [insert link] ```
+``` nvidia-docker run -it -p 0.0.0.0:8000:8000 --rm --name [insert name here] [insert link from step #4 here] /bin/bash run_server.sh ```
 
 
 
