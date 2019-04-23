@@ -132,7 +132,7 @@ restart docker
 
 5) Run the docker container 
 
-` nvidia-docker run -it -p 0.0.0.0:8000:8000 --rm --name ` __`[insert name here] [insert link from step #4 here]`__ `/bin/bash run_server.sh `
+` nvidia-docker run -it -p 0.0.0.0:8000:8000 --rm --name `__`[insert desired name here] [insert link from step #4 here]`__`/bin/bash run_server.sh `
 
 
 
