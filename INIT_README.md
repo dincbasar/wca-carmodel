@@ -1,10 +1,22 @@
 # Undergraduate Researcher Guide
 
-Welcome to Satyalab. This document is designed to facilitate your process of adapting and start working on the important stuff as quickly as possible. We will first describe the environment, then give the helpful bits.
+Welcome to Satyalab. This document is designed to facilitate your process of adapting and start working on the important stuff as quickly as possible. We will first give quick definitions to describe the environment, then give the helpful bits.
 
 ## Wearable Cognitive Assistant Environment
 
-### Prerequisites
+### Basic
+
+* __Distributed Network__: A system of computers that run specifics processes. For instance, your computer connecting with the Gmail server to send/receive emails. 
+* __Latency__: The delay caused by data transfer from one computer to another. 
+* __Bandwidth__: The amount of data that can be transferred from one computer to another in given time.
+* __Local Computing__: Your computer running a program. Since there is no transfer of data over the internet, there is no network latency (aka transfer time), but your computer might not be powerful enough. 
+* __Cloud Computing__: Your computer asking some other computer (usually rented, examples: Amazon AWS, Microsoft Azure) to run a program over the internet, and receiving the output. High network latency, but more powerful / purpose-specific computers possible. 
+* __Cloudlet__: A computer that sits right inbetween your local machine and the cloud machines, to help with the network latency in operations that can be computed without the cloud machines. Example: Amazon Alexa, Google Home. 
+* __Edge computing__: Using cloudlets in the distributed system. 
+
+
+### Satyalab Specific
+
 
 What things you need to install the software and how to install them
 
