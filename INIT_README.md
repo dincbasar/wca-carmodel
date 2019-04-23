@@ -62,7 +62,7 @@ ___
 
 3) Create the required labels for the distinct objects you want to detect, and start labeling the frames.
   * The server might crash at unexpected points. Save your work frequently (there is no auto-save), otherwise your work since the last save will be entirely discared. 
-  * If there are no labeled frames, TPOD discards entire frame.
+  * If there are no labels in a frame, it is entirely discarded. This is useful if the object is blurry, obstructed, or if you just don't want to use certain parts of the training video.
   * If a visible instance of the object is not labeled in a frame that has other labels, your accuracy will drop. In other words, if you are labeling a frame, either label it completely or include no labels at all. 
   * Use the tracker to your advantage: after labeling an object, wait for a second or two, then observe next frames as long as the labels are not accurate.
   * Label the entire object in frames. With motion, the tracker might switch to including only parts of the object. Correct these, and wait for the tracker again. 
