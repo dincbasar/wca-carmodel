@@ -112,6 +112,9 @@ sudo apt-get install python3
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py 
 python3 get-pip.py
 
+# docker, the container service, not mandatory but still useful
+sudo apt-get install docker
+
 # nvidia drivers, required by nvidia-docker2
 sudo apt-get install nvidia-container-runtime
 
@@ -121,6 +124,13 @@ sudo apt-get install nvidia-docker2
 # restart docker if you had already started it before
 restart docker
 ```
+
+4) Get the deployment link from TPOD. Go to `http://cloudlet001.elijah.cs.cmu.edu:10000/classifier/list` and click _Export Classifier Image_ for the trained classifier. The final link should be something of the form `registry.cmusatyalab.org/junjuew/container-registry:X`
+
+5) Run the docker container 
+
+``` docker pull [insert link] ```
+
 
 
 ## Authors
