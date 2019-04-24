@@ -61,7 +61,7 @@ ___
   * Take many videos, at least 10. There is a limit on how many frames should be used for each object, but that is presumably far away from what you can reach. 
 
 3) Create the required labels for the distinct objects you want to detect, and start labeling the frames.
-  * The server might crash at unexpected points. Save your work frequently (there is no auto-save), otherwise your work since the last save will be entirely discared. 
+  * Just in case there is an error, save your work frequently (there is no auto-save), otherwise your work since the last save will be entirely discared. 
   * If there are no labels in a frame, it is entirely discarded. This is useful if the object is blurry, obstructed, or if you just don't want to use certain parts of the training video.
   * If a visible instance of the object is not labeled in a frame that has other labels, your accuracy will drop. In other words, if you are labeling a frame, either label it completely or include no labels at all. 
   * Use the tracker to your advantage: after labeling an object, wait for a second or two, then observe next frames as long as the labels are not accurate.
