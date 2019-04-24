@@ -69,8 +69,6 @@ ___
   * It is fine to have label bounds overlap, since TPOD only does upright rectangles. For instance, the following is perfectly OK: 
 <img src="https://github.com/dincbasar/wca-carmodel/blob/master/Screen%20Shot%202019-04-22%20at%209.55.39%20PM.png" width="250">
   
-  * __Tochange__: What does the obstructed option do? Include information regarding that here
-  
 4) Submit the labeled videos for training. You are given the option to pick the videos and labels (distinct objects) that you would like to train your model on. Epoch = 10K or 20K is a good choice, and pick the faster-RCNN model for training. This process will take approximately an hour.
 
 5) From here onwards, you will need access to a GPU machine. Talk to your supervisor to obtain access. As of April 2019, one is available on cloudlet012.elijah.cs.cmu.edu. You can contact [Tom Eiszler](mailto:teiszler@cs.cmu.edu) to create an account.
