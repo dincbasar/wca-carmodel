@@ -38,7 +38,7 @@ _Taken from Microsoft Azure documentation._
 
 ![alt-text](https://github.com/dincbasar/wca-carmodel/blob/master/Screen%20Shot%202019-04-22%20at%2011.18.23%20PM.png)
 
-* __TPOD__: Stands for A Tool For Painless Object Detection. It is used to train a [faster-RCNN](https://arxiv.org/pdf/1506.01497.pdf) instance to help with object detection in cognitive assistants. It features a basic tracking model to help with labeling frames. Further details [here](Link Part Here).
+* __TPOD__: Stands for A Tool For Painless Object Detection. It is used to train a [faster-RCNN](https://arxiv.org/pdf/1506.01497.pdf) instance to help with object detection in cognitive assistants. It features a basic tracking model to help with labeling frames. See the section below for further details.
 
 ___ 
 
@@ -73,7 +73,7 @@ ___
   
 4) Submit the labeled videos for training. You are given the option to pick the videos and labels (distinct objects) that you would like to train your model on. Epoch = 10K or 20K is a good choice, and pick the faster-RCNN model for training. This process will take approximately an hour.
 
-5) From here onwards, you will need access to a GPU machine. Talk to your supervisor to obtain access. As of April 2019, one is available on cloudlet012.elijah.cs.cmu.edu. You can contact [Tom Eiszler](mailto:teiszler@cs.cmu.edu) to create an account.
+5) From here onwards, you will need access to a GPU machine. Talk to your supervisor to obtain access. __for CMU students:__ As of April 2019, one is available on cloudlet012.elijah.cs.cmu.edu. You can contact [Tom Eiszler](mailto:teiszler@cs.cmu.edu) to create an account.
 
 ### Testing (system-design dependent)
 
