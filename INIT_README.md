@@ -66,7 +66,7 @@ ___
   * Just in case there is a system error, save your work frequently (there is no auto-save), otherwise your work since the last save will be entirely discared. 
   * If there are no labels in a frame, it is entirely discarded. This is useful if the object is blurry, obstructed, or if you just don't want to use certain parts of the training video.
   * __important__ If you are labeling a frame, either label it completely or include no labels at all. If a visible instance of the object is not labeled in a frame that has other objects labeled, your accuracy will drop. 
-  * Use the tracker to your advantage: after labeling an object, wait for a second or two, then observe next frames as long as the labels are not accurate.
+  * Use the tracker to your advantage: after labeling an object, wait for a second or two, then observe next frames as long as the labels are not accurate. For instance, the example below would be bad if we were training TPOD on tires (the black circular objects), because other objects are labeled in the frame, but tires are not. 
   * Label the entire object in frames. With motion, the tracker might switch to including only parts of the object. Correct these, and wait for the tracker again. 
   * It is fine to have label bounds overlap, since TPOD only does upright rectangles. For instance, the following is perfectly OK: 
 <img src="https://github.com/dincbasar/wca-carmodel/blob/master/Screen%20Shot%202019-04-22%20at%209.55.39%20PM.png" width="250">
