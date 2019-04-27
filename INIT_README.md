@@ -1,6 +1,6 @@
 # (Undergraduate) Researcher Guide
 
-_Dear friends at Aalto -- Carnegie Mellon is excited for you to start utilizing TPOD! We hope you find this document useful in your work, please feel free to email me at db1@cmu.edu for any clarifications or suggestions._
+_Dear friends at Aalto -- we are excited for you to start using TPOD! We hope you find this document useful in your work, please feel free to email me at db1@cmu.edu for any clarifications or suggestions._
 
 Welcome to Satyalab. This document is designed to facilitate your process of adapting to the environment, so you can start working on the important stuff as quickly as possible. We will first give quick definitions that are useful to know, then give the helpful bits about the timeline. 
 
