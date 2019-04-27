@@ -73,7 +73,7 @@ ___
   
 4) Submit the labeled videos for training. You are given the option to pick the videos and labels (distinct objects) that you would like to train your model on. Epoch = 10K or 20K is a good choice, and pick the faster-RCNN model for training. This process will take approximately an hour.
 
-5) From here onwards, you will need access to a GPU machine. Talk to your supervisor to obtain access. __for CMU students:__ As of April 2019, one is available on cloudlet012.elijah.cs.cmu.edu. You can contact [Tom Eiszler](mailto:teiszler@cs.cmu.edu) to create an account.
+5) From here onwards, you will need access to a GPU machine. Talk to your supervisor to obtain access. __For CMU students:__ As of April 2019, one is available on cloudlet012.elijah.cs.cmu.edu. You can contact [Tom Eiszler](mailto:teiszler@cs.cmu.edu) to create an account.
 
 ### Testing (system-design dependent)
 
@@ -149,4 +149,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 * Mahadev Satyanarayanan
-* Matt Gormley
+* Tom Eiszler
