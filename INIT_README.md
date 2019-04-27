@@ -1,4 +1,6 @@
-# Undergraduate Researcher Guide
+# (Undergraduate) Researcher Guide
+
+Dear friends at Aalto -- we are excited for you to start using TPOD! We hope you find this document useful in your work, please feel free to email me at db1@cmu.edu for any clarifications or suggestions. 
 
 Welcome to Satyalab. This document is designed to facilitate your process of adapting to the environment, so you can start working on the important stuff as quickly as possible. We will first give quick definitions that are useful to know, then give the helpful bits about the timeline. 
 
@@ -24,8 +26,8 @@ Designed to go from basic to more complex, skip parts as needed.
 _Taken from Microsoft Azure documentation._
 
 * __Platform-as-a-service__: In Cloud systems, providing the necessary tools to develop, build, and run applications on remote machines. Basically, all the client needs to do is: build applications using the provided tools, and not worry about anything else. The more inclusive step is SaaS, where even the applications are provided to the customer. 
-* __Neural Network__: A fundamental building block of many ML applications. It supports probabilistic learning, and can have multiple modes of output. __More pending Matt Gormley confirmation.__ 
-* __Convolutional Neural Network__: Unlike regular NN inputs, images have a significant amount of pixels. If all of these were used as parameters, the training would be extremely slow (if not impossible, depending on resolution). Therefore, image inputs to a CNN are _convoluted_, where a mask is applied to the input matrix to produce a (probably) smaller matrix that can be used to train the network on. This introduces multiple new hyperparameters, such as: the mask, stride (how many pixels to jump at each convolution), padding (what happens on edges of image matrix). __More pending Matt Gormley confirmation.__ 
+* __Neural Network__: A fundamental building block of many ML applications. It supports probabilistic learning, and can have multiple modes of output.
+* __Convolutional Neural Network__: Unlike regular NN inputs, images have a significant amount of pixels. If all of these were used as parameters, the training would be extremely slow (if not impossible, depending on resolution). Therefore, image inputs to a CNN are _convoluted_, where a mask is applied to the input matrix to produce a (probably) smaller matrix that can be used to train the network on. This introduces multiple new hyperparameters, such as: the mask, stride (how many pixels to jump at each convolution), padding (what happens on edges of image matrix).
 * __Recurrent CNN__: Read more [here](https://wiki.tum.de/display/lfdv/Recurrent+Neural+Networks+-+Combination+of+RNN+and+CNN) if needed. Might be a little unnecessary depending on your application.
 
 ### Satyalab Specific
@@ -42,7 +44,7 @@ ___
 
 ## Expected Timeline
 
-### Training
+### Training the TPOD Application
 
 1) Figure out a useful process to develop a WCA in. Some questions to consider:
   * Will people actually use it in the future? Does it serve as an example of what Gabriel can achieve?
@@ -52,18 +54,18 @@ ___
   
 2) If you are able to use TPOD for your application (ask your supervisor about this): get started with taking training videos. Start basic with the number of distinct object classes you are trying to detect, then add more as you build experience. Always keep your use environment (where/how/when will the glass wearer use this application) in mind in this step to take the most applicable videos possible. Some features of useful videos:
   * Landscape (horizontal) videos only. Do not take vertical ones, as TPOD will not be happy with that.
-  * Consider the lighting conditions of the use environment. If you are building for the outdoors, do not take your videos inside. If you are building for indoors, make sure to use multiple levels and types of lighting, as these can significantly change the accuracy of the RCNN. 
   * Use false positives ( objects that are similar to the one you are trying to detect, but definitely not what the exact object) in the background, especially items that can be found in your use environment. These will help the RCNN not make mistakes.
+  * Consider the lighting conditions of the use environment. If you are building for the outdoors, do not take your videos inside. If you are building for indoors, make sure to use multiple levels and types of lighting, as these can significantly change the accuracy of the RCNN. 
   * Video length is variable, but 8-10 seconds is usually enough to get enough frames (around 400-600) for a certain environment. 
   * Keep movement low (if this is not against your application), but do not completely eliminate it. Some movement will result slightly-out-of-focus frames that are harder but probably useful to detect. In the end, there will be significant head movement with the glass, so losing track with low motion is probably not a good feature for your application. If the training video includes quick movement, the basic tracker on TPOD will not be able to follow the frames. This will cause you to manually label many more frames than what is ideal.
   * Think of your use environment to determine what object view characteristics you want. Would you like to be able to detect objects that are partially obstructed? Partially out of frame? Held in hand? Merged with another object?
-  * Any background restrictions you might use is a critical choice in design. Discuss this with your supervisor early, according to the needs of your application.
+  * Any background restrictions you might use is a critical choice in design. Discuss this with your supervisor early, according to the needs of your application. A background restriction can be: requiring the user to have a white paper working space, so that you can limit the object detection space.
   * Take many videos, at least 10. There is a limit on how many frames should be used for each object, but that is presumably far away from what you can reach. 
 
 3) Create the required labels for the distinct objects you want to detect, and start labeling the frames.
-  * Just in case there is an error, save your work frequently (there is no auto-save), otherwise your work since the last save will be entirely discared. 
+  * Just in case there is a system error, save your work frequently (there is no auto-save), otherwise your work since the last save will be entirely discared. 
   * If there are no labels in a frame, it is entirely discarded. This is useful if the object is blurry, obstructed, or if you just don't want to use certain parts of the training video.
-  * If a visible instance of the object is not labeled in a frame that has other labels, your accuracy will drop. In other words, if you are labeling a frame, either label it completely or include no labels at all. 
+  * __important__ If you are labeling a frame, either label it completely or include no labels at all. If a visible instance of the object is not labeled in a frame that has other objects labeled, your accuracy will drop. 
   * Use the tracker to your advantage: after labeling an object, wait for a second or two, then observe next frames as long as the labels are not accurate.
   * Label the entire object in frames. With motion, the tracker might switch to including only parts of the object. Correct these, and wait for the tracker again. 
   * It is fine to have label bounds overlap, since TPOD only does upright rectangles. For instance, the following is perfectly OK: 
@@ -73,11 +75,11 @@ ___
 
 5) From here onwards, you will need access to a GPU machine. Talk to your supervisor to obtain access. As of April 2019, one is available on cloudlet012.elijah.cs.cmu.edu. You can contact [Tom Eiszler](mailto:teiszler@cs.cmu.edu) to create an account.
 
-### Testing
+### Testing (system-design dependent)
 
 Now that you have a trained RCNN model, it is a good idea to test it and find all of its inaccuracies and mistakes. These will help you figure out how you can improve your training videos. 
 
-1) SSH into your GPU machine. 
+1) SSH (or connect in some other form) into your GPU machine. 
 * If you are not on the CMU campus network, you will need to use [VPN](https://www.cmu.edu/computing/services/endpoint/network-access/vpn/how-to/index.html). Pick the Library Resources VPN from the drop-down menu when you get to the login option. 
 * You will need sudo access (most likely) to install packages, so make sure you have it. 
 
